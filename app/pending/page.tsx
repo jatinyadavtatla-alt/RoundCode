@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, ArrowLeft } from "lucide-react";
+import { Clock, ArrowRight, ShieldAlert, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -9,21 +9,32 @@ export default function PendingPage() {
       <div className="w-full max-w-md text-center">
         <Card className="border-zinc-800 bg-[#0c0d12]">
           <CardContent className="p-8">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-amber-900/50 bg-amber-950/30 text-amber-400 mb-4">
-              <Clock className="h-6 w-6" />
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-900/50 bg-amber-950/30 text-amber-400 mb-5 shadow-inner">
+              <Clock className="h-7 w-7" />
             </div>
 
-            <h1 className="text-xl font-bold text-white">
-              Account Verification
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-900/50 bg-amber-950/40 px-3 py-0.5 text-xs font-mono text-amber-300 mb-3">
+              <ShieldAlert className="h-3 w-3" />
+              <span>Pending Administrator Approval</span>
+            </div>
+
+            <h1 className="text-2xl font-bold text-white tracking-tight">
+              Application Submitted
             </h1>
             <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-              If your account is pending review, society administrators will verify your details shortly.
+              Your registration request has been queued for administrator review. Once an administrator approves your account, you will be able to sign in immediately.
             </p>
 
-            <div className="mt-6">
+            <div className="mt-8 flex flex-col gap-2.5">
+              <Link href="/login">
+                <Button className="w-full bg-zinc-100 text-zinc-950 hover:bg-white font-medium text-xs">
+                  Try Signing In
+                  <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                </Button>
+              </Link>
               <Link href="/">
-                <Button variant="secondary" size="sm" className="w-full">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
+                <Button variant="ghost" size="sm" className="w-full text-zinc-400 hover:text-white text-xs">
+                  <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
                   Return Home
                 </Button>
               </Link>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db/mongodb";
 import { User } from "@/models/User";
 import { hashPassword } from "@/lib/auth/password";
-import { createSessionToken, setSessionCookie } from "@/lib/auth/session";
+import { isAuthorizedAdminEmail } from "@/lib/auth/adminSeed";
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,6 +25,14 @@ export async function POST(request: NextRequest) {
 
     const normalizedEmail = email.toLowerCase().trim();
 
+    // Do not allow regular signups using the 4 reserved admin emails
+    if (isAuthorizedAdminEmail(normalizedEmail)) {
+      return NextResponse.json(
+        { success: false, error: "This email is reserved for system administrators. Please sign in directly." },
+        { status: 400 }
+      );
+    }
+
     try {
       await connectToDatabase();
       const existingUser = await User.findOne({ email: normalizedEmail });
@@ -45,29 +53,20 @@ export async function POST(request: NextRequest) {
         year: Number(year),
         passwordHash,
         role: "member",
-        status: "approved",
+        status: "pending", // User request requires admin approval before account is active
       });
-
-      const token = await createSessionToken({
-        userId: newUser._id.toString(),
-        email: newUser.email,
-        name: newUser.name,
-        role: newUser.role,
-        status: newUser.status,
-      });
-
-      await setSessionCookie(token);
 
       return NextResponse.json(
         {
           success: true,
-          message: "Registration successful.",
+          pendingApproval: true,
+          message:
+            "Signup request submitted successfully. An administrator must approve your application before you can sign in.",
           data: {
             user: {
               id: newUser._id,
               name: newUser.name,
               email: newUser.email,
-              role: newUser.role,
               status: newUser.status,
             },
           },

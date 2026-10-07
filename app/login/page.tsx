@@ -33,7 +33,7 @@ export default function LoginPage() {
         throw new Error(data.error || "Failed to sign in");
       }
 
-      router.push("/dashboard");
+      router.push(data.redirect || "/dashboard");
       router.refresh();
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");
@@ -55,7 +55,7 @@ export default function LoginPage() {
             Welcome to RoundCode
           </h1>
           <p className="mt-2 text-sm text-zinc-400">
-            Sign in to access problem sets, run code, and track your progress
+            Sign in to access problem sets, submit solutions, and receive mentor feedback
           </p>
         </div>
 

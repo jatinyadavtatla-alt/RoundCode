@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BookOpen, Video, ExternalLink, FileText, Code2, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -70,10 +70,36 @@ const SAMPLE_RESOURCES: ResourceItem[] = [
 const RESOURCE_TYPES = ["All", "youtube", "leetcode", "article", "other"];
 
 export default function ResourcesPage() {
+  const [resources, setResources] = useState<ResourceItem[]>(SAMPLE_RESOURCES);
   const [search, setSearch] = useState("");
   const [selectedType, setSelectedType] = useState("All");
 
-  const filtered = SAMPLE_RESOURCES.filter((item) => {
+  useEffect(() => {
+    async function loadDbResources() {
+      try {
+        const res = await fetch("/api/admin/resources");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.data && data.data.length > 0) {
+            const formatted = data.data.map((item: any) => ({
+              id: item._id,
+              title: item.title,
+              description: item.description,
+              type: item.type,
+              topic: item.topic,
+              url: item.url,
+            }));
+            setResources([...formatted, ...SAMPLE_RESOURCES]);
+          }
+        }
+      } catch (e) {
+        // Fallback to sample
+      }
+    }
+    loadDbResources();
+  }, []);
+
+  const filtered = resources.filter((item) => {
     const matchesSearch =
       item.title.toLowerCase().includes(search.toLowerCase()) ||
       item.description.toLowerCase().includes(search.toLowerCase()) ||

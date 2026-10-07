@@ -67,7 +67,7 @@ export default function RegisterPage() {
         throw new Error(data.error || "Failed to create account.");
       }
 
-      router.push("/dashboard");
+      router.push("/pending?submitted=true");
       router.refresh();
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");

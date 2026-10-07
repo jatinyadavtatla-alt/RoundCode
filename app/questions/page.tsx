@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Code2, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -118,11 +118,37 @@ const TOPICS = [
 const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
 
 export default function QuestionsPage() {
+  const [questions, setQuestions] = useState<QuestionItem[]>(SAMPLE_QUESTIONS);
   const [search, setSearch] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("All");
   const [selectedDifficulty, setSelectedDifficulty] = useState("All");
 
-  const filteredQuestions = SAMPLE_QUESTIONS.filter((q) => {
+  useEffect(() => {
+    async function loadDbQuestions() {
+      try {
+        const res = await fetch("/api/admin/questions");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.data && data.data.length > 0) {
+            const formatted = data.data.map((item: any, idx: number) => ({
+              id: item._id,
+              title: item.title,
+              topic: item.topic,
+              difficulty: item.difficulty,
+              acceptance: "Review Workflow",
+              leetcodeUrl: item.leetcodeUrl,
+            }));
+            setQuestions([...formatted, ...SAMPLE_QUESTIONS]);
+          }
+        }
+      } catch (e) {
+        // Fallback
+      }
+    }
+    loadDbQuestions();
+  }, []);
+
+  const filteredQuestions = questions.filter((q) => {
     const matchesSearch =
       q.title.toLowerCase().includes(search.toLowerCase()) ||
       q.topic.toLowerCase().includes(search.toLowerCase());
@@ -151,14 +177,14 @@ export default function QuestionsPage() {
             DSA Problem Library
           </h1>
           <p className="mt-1 text-sm text-zinc-400">
-            Topic-wise algorithmic challenges with automated test vectors and difficulty grading
+            Topic-wise algorithmic challenges with Monaco Editor and faculty code review
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <Link href="/dashboard">
+          <Link href="/submissions">
             <Button variant="secondary" size="sm">
-              My Progress
+              My Submissions
             </Button>
           </Link>
         </div>
@@ -242,7 +268,7 @@ export default function QuestionsPage() {
                     <div className="mt-1 flex items-center gap-2 text-xs text-zinc-500">
                       <span>{q.topic}</span>
                       <span>•</span>
-                      <span>Acceptance: {q.acceptance}</span>
+                      <span>Review Workflow</span>
                     </div>
                   </div>
                 </div>
@@ -260,23 +286,11 @@ export default function QuestionsPage() {
                     {q.difficulty}
                   </Badge>
 
-                  {q.leetcodeUrl ? (
-                    <a
-                      href={q.leetcodeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center"
-                    >
-                      <Button size="sm" variant="secondary" className="gap-1 text-xs">
-                        Solve
-                        <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />
-                      </Button>
-                    </a>
-                  ) : (
-                    <Button size="sm" className="text-xs">
-                      Solve
+                  <Link href={`/questions/${q.id}`}>
+                    <Button size="sm" className="bg-zinc-100 text-zinc-950 hover:bg-white text-xs font-medium">
+                      Solve & Submit
                     </Button>
-                  )}
+                  </Link>
                 </div>
               </CardContent>
             </Card>

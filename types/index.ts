@@ -86,29 +86,30 @@ export interface IQuestion {
 }
 
 export type SubmissionStatus =
-  | "Accepted"
-  | "Wrong Answer"
-  | "Compilation Error"
-  | "Runtime Error"
-  | "Time Limit Exceeded"
-  | "Pending";
+  | "Pending Review"
+  | "Under Review"
+  | "Approved"
+  | "Needs Revision";
 
 export interface ISubmission {
   _id: string;
   userId: string;
+  userName?: string;
+  userEmail?: string;
   questionId: string;
+  questionTitle?: string;
   code: string;
   language: string;
   status: SubmissionStatus;
-  runtime?: number; // ms
-  memory?: number; // KB
-  testCasesPassed: number;
-  totalTestCases: number;
   adminFeedback?: string;
+  reviewedBy?: string;
+  reviewedByName?: string;
+  reviewedAt?: Date | string;
   submittedAt: Date | string;
+  updatedAt?: Date | string;
 }
 
-export type ResourceType = "youtube" | "leetcode" | "pdf" | "article" | "other";
+export type ResourceType = "youtube" | "video" | "leetcode" | "pdf" | "article" | "other";
 
 export interface IResource {
   _id: string;

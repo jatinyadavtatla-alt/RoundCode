@@ -63,11 +63,11 @@ export default function HomePage() {
           </div>
           <div className="flex items-center gap-1.5">
             <Code2 className="h-4 w-4 text-indigo-400" />
-            <span>Multi-Language Code Runner</span>
+            <span>Monaco Editor Workspace</span>
           </div>
           <div className="flex items-center gap-1.5">
             <GitBranch className="h-4 w-4 text-amber-400" />
-            <span>Structured Progress Tracking</span>
+            <span>Mentor Code Reviews</span>
           </div>
         </div>
 
@@ -86,12 +86,12 @@ export default function HomePage() {
               <Badge variant="easy">Easy</Badge>
               <span className="font-mono text-xs text-emerald-400 flex items-center gap-1">
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                Accepted (12ms, 10.4MB)
+                Status: Approved
               </span>
             </div>
           </div>
           <div className="p-5 font-mono text-xs leading-relaxed text-zinc-300 overflow-x-auto">
-            <p className="text-zinc-500">// RoundCode Online Judge Verification</p>
+            <p className="text-zinc-500">// RoundCode Member Solution Submission</p>
             <p className="text-zinc-500">
               // Target Complexity: O(N) Time · O(N) Space
             </p>
@@ -126,7 +126,7 @@ export default function HomePage() {
             How It Works
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Everything You Need to Master Coding Interviews
+            From Problem Solving to Mentored Mastery
           </h2>
         </div>
 
@@ -151,10 +151,10 @@ export default function HomePage() {
                 <Code2 className="h-5 w-5 text-emerald-400" />
               </div>
               <h3 className="text-base font-semibold text-white">
-                2. Real-Time Code Execution
+                2. Monaco Editor & Submission
               </h3>
               <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                Write solutions in C++, Java, Python, or JavaScript with instant test execution and detailed feedback.
+                Code in C++, Java, Python, or JavaScript with syntax highlighting and submit directly to MongoDB for mentor review.
               </p>
             </CardContent>
           </Card>
@@ -162,13 +162,13 @@ export default function HomePage() {
           <Card>
             <CardContent className="pt-6">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-200 mb-4">
-                <BookOpen className="h-5 w-5 text-amber-400" />
+                <GitBranch className="h-5 w-5 text-amber-400" />
               </div>
               <h3 className="text-base font-semibold text-white">
-                3. Curated Learning Resources
+                3. Admin Feedback & Iteration
               </h3>
               <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                Access curated video tutorials, comprehensive cheat sheets, and algorithm deep dives to build your intuition.
+                Faculty and administrators review your code structure, leave actionable feedback, and approve your optimal implementations.
               </p>
             </CardContent>
           </Card>

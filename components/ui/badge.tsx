@@ -17,6 +17,12 @@ const badgeVariants = cva(
           "border border-emerald-900/60 bg-emerald-950/40 text-emerald-400",
         pending:
           "border border-amber-900/60 bg-amber-950/40 text-amber-400",
+        pending_review:
+          "border border-amber-900/60 bg-amber-950/40 text-amber-400",
+        under_review:
+          "border border-sky-900/60 bg-sky-950/40 text-sky-400",
+        needs_revision:
+          "border border-rose-900/60 bg-rose-950/40 text-rose-400",
         rejected:
           "border border-rose-900/60 bg-rose-950/40 text-rose-400",
         suspended:
