@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 25% 6%;
+    --foreground: 210 20% 98%;
+
+    --card: 224 22% 8%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 224 22% 8%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 224 25% 6%;
+
+    --secondary: 220 16% 14%;
+    --secondary-foreground: 210 20% 92%;
+
+    --muted: 220 16% 13%;
+    --muted-foreground: 218 11% 65%;
+
+    --accent: 220 16% 16%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 16%;
+    --input: 220 13% 18%;
+    --ring: 216 12% 40%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-white/20 selection:text-white;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #08090d;
+    background-image: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(120, 119, 198, 0.08),
+      rgba(255, 255, 255, 0)
+    );
+    min-height: 100vh;
+  }
+}
+
+/* Custom developer scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08090d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f232e;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2e3444;
+}
+
+/* Code block & mono helper */
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
