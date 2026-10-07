@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     "RoundCode",
   ],
   authors: [{ name: "RoundCode" }],
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export const viewport: Viewport = {
