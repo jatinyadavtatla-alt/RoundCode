@@ -15,13 +15,13 @@ export default function NotFound() {
         This route does not exist.
       </h1>
       <p className="mt-4 max-w-md text-sm text-zinc-400">
-        The requested path could not be resolved in the RoundTable directory. Verify the target URI or return to the platform console.
+        The requested path could not be resolved in the RoundCode directory. Verify the target URI or return to the platform home.
       </p>
       <div className="mt-8">
         <Link href="/">
           <Button variant="secondary" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Return to RoundTable
+            Return to RoundCode
           </Button>
         </Link>
       </div>

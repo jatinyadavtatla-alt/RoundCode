@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Terminal, Shield, Menu, X, ArrowRight, Code2 } from "lucide-react";
+import { Terminal, Menu, X, ArrowRight, Code2, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface NavbarProps {
@@ -26,13 +26,13 @@ export function Navbar({ user }: NavbarProps) {
           </div>
           <div className="flex flex-col">
             <span className="font-semibold text-sm tracking-tight text-zinc-100 group-hover:text-white flex items-center gap-1.5">
-              RoundTable
+              RoundCode
               <span className="inline-block rounded px-1.5 py-0.2 text-[10px] font-mono tracking-normal bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">
                 v1.0
               </span>
             </span>
             <span className="text-[11px] text-zinc-500 font-mono tracking-tight -mt-0.5">
-              Technical Society
+              DSA & Coding Platform
             </span>
           </div>
         </Link>
@@ -44,19 +44,15 @@ export function Navbar({ user }: NavbarProps) {
             className="transition-colors hover:text-zinc-100 flex items-center gap-1.5"
           >
             <Code2 className="h-3.5 w-3.5 text-zinc-500" />
-            Curriculum
+            Problems
           </Link>
           <Link
             href="/resources"
-            className="transition-colors hover:text-zinc-100"
+            className="transition-colors hover:text-zinc-100 flex items-center gap-1.5"
           >
+            <BookOpen className="h-3.5 w-3.5 text-zinc-500" />
             Resources
           </Link>
-          <div className="h-4 w-[1px] bg-zinc-800" />
-          <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500">
-            <Shield className="h-3.5 w-3.5 text-zinc-600" />
-            <span>Invitation & Approval Only</span>
-          </div>
         </nav>
 
         {/* Right CTA */}
@@ -68,7 +64,7 @@ export function Navbar({ user }: NavbarProps) {
               </span>
               <Link href={user.role === "admin" || user.role === "superadmin" ? "/admin" : "/dashboard"}>
                 <Button size="sm" variant="secondary">
-                  Open Console
+                  Dashboard
                 </Button>
               </Link>
             </div>
@@ -81,7 +77,7 @@ export function Navbar({ user }: NavbarProps) {
               </Link>
               <Link href="/register">
                 <Button size="sm" className="bg-zinc-100 text-zinc-950 hover:bg-white font-medium">
-                  Apply for Membership
+                  Sign Up
                   <ArrowRight className="ml-1.5 h-3.5 w-3.5 text-zinc-700" />
                 </Button>
               </Link>
@@ -109,7 +105,7 @@ export function Navbar({ user }: NavbarProps) {
               className="py-1.5 hover:text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Curriculum
+              Problems
             </Link>
             <Link
               href="/resources"
@@ -127,7 +123,7 @@ export function Navbar({ user }: NavbarProps) {
             </Link>
             <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
               <Button size="sm" className="w-full">
-                Apply for Membership
+                Sign Up
               </Button>
             </Link>
           </div>

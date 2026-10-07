@@ -4,11 +4,11 @@ import { SessionPayload } from "@/types";
 
 const AUTH_SECRET =
   process.env.AUTH_SECRET ||
-  "roundtable-default-dev-secret-do-not-use-in-production-32-chars";
+  "roundcode-default-dev-secret-do-not-use-in-production-32-chars";
 
 const SECRET_KEY = new TextEncoder().encode(AUTH_SECRET);
 export const COOKIE_NAME =
-  process.env.SESSION_COOKIE_NAME || "roundtable_session";
+  process.env.SESSION_COOKIE_NAME || "roundcode_session";
 const SESSION_DURATION = 7 * 24 * 60 * 60; // 7 days in seconds
 
 /**

@@ -72,7 +72,7 @@ const UserSchema = new Schema<IUserDocument>(
     status: {
       type: String,
       enum: ["pending", "approved", "rejected", "suspended"],
-      default: "pending",
+      default: "approved",
       index: true,
     },
   },

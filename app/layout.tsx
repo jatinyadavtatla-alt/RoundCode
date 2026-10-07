@@ -18,9 +18,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RoundTable — Learn. Practice. Grow.",
+  title: "RoundCode — Learn. Practice. Grow.",
   description:
-    "RoundTable is a private engineering society platform for DSA mastery, rigorous code evaluation, and member development.",
+    "RoundCode is the platform for DSA mastery, interactive problem solving, and member skill development.",
   keywords: [
     "DSA",
     "Data Structures",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     "Competitive Programming",
     "Technical Society",
     "Coding Platform",
-    "RoundTable",
+    "RoundCode",
   ],
-  authors: [{ name: "RoundTable Technical Society" }],
+  authors: [{ name: "RoundCode" }],
 };
 
 export const viewport: Viewport = {
