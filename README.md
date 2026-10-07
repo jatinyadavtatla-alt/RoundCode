@@ -1,15 +1,15 @@
-# RoundTable
+# RoundCode
 
 > **Learn. Practice. Grow.**  
-> A private, production-grade technical society platform designed for DSA mastery, rigorous code evaluation, and member development.
+> A production-grade platform designed for DSA mastery, interactive problem solving, and member skill development.
 
 ---
 
 ## 1. Overview
 
-RoundTable provides a closed, high-standard environment for university engineering societies. The core workflow is:
+RoundCode provides a focused environment for mastering Data Structures & Algorithms. The core workflow is:
 
-$$\text{Register} \longrightarrow \text{Admin Approval} \longrightarrow \text{Login} \longrightarrow \text{Learn} \longrightarrow \text{Practice} \longrightarrow \text{Submit Code} \longrightarrow \text{Track Progress}$$
+$$\text{Register} \longrightarrow \text{Login} \longrightarrow \text{Learn} \longrightarrow \text{Practice} \longrightarrow \text{Submit Code} \longrightarrow \text{Track Progress}$$
 
 - **Vetted Registry**: Access is gated behind mandatory administrator review (`pending`, `approved`, `rejected`, `suspended`).
 - **In-Browser Code Execution**: Interactive Monaco Editor executing code across C++, Java, Python, and JavaScript powered by Judge0.
