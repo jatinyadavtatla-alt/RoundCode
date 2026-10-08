@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
 interface MongooseCache {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -23,27 +21,38 @@ if (!global.mongooseCache) {
 
 /**
  * Connect to MongoDB using Mongoose with connection pooling and dev-server caching.
+ * MongoDB MUST ONLY use process.env.MONGODB_URI.
+ * If MONGODB_URI is missing or empty, throws a clear Error immediately instead of silently falling back to localhost.
  */
 export async function connectToDatabase(): Promise<typeof mongoose> {
-  if (!MONGODB_URI) {
+  const mongodbUri = process.env.MONGODB_URI;
+
+  if (!mongodbUri || !mongodbUri.trim()) {
     throw new Error(
-      "Please define the MONGODB_URI environment variable inside .env.local"
+      "Missing MONGODB_URI environment variable. Please define MONGODB_URI in your environment settings (e.g., Vercel Environment Variables or .env.local)."
     );
   }
 
+  const cleanUri = mongodbUri.trim();
+
   if (cached.conn) {
-    return cached.conn;
+    if (cached.conn.connection.readyState === 1) {
+      return cached.conn;
+    }
   }
 
   if (!cached.promise) {
     const opts: mongoose.ConnectOptions = {
       bufferCommands: false,
       maxPoolSize: 10,
-      dbName: process.env.MONGODB_DB_NAME || "roundcode",
+      serverSelectionTimeoutMS: 10000,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+    cached.promise = mongoose.connect(cleanUri, opts).then((mongooseInstance) => {
       return mongooseInstance;
+    }).catch((err) => {
+      cached.promise = null;
+      throw err;
     });
   }
 
